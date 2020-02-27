@@ -45,11 +45,7 @@ const SidebarBottomA = () => (
                 >
                     <i className="fa fa-fw fa-question-circle-o"></i>
                 </Button>
-                <UncontrolledPopover placement="left-end" target="UncontrolledSidebarPopoverFooter">
-                    <PopoverBody>
-                        <FooterText />
-                    </PopoverBody>
-                </UncontrolledPopover>
+                
             </Sidebar.Section>
         </Sidebar.ShowSlim>
         { /* END Slim Only */ }
