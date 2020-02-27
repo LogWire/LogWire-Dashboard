@@ -13,10 +13,7 @@ import './../styles/main.scss';
 import './../styles/plugins/plugins.scss';
 import './../styles/plugins/plugins.css';
 
-import {
-    RoutedNavbars,
-    RoutedSidebars,
-} from './../routes';
+import { DefaultSidebar } from './../layout/components/DefaultSidebar';
 
 const favIcons = [
     { rel: 'icon', type: 'image/x-icon', href: require('./../images/favicons/favicon.ico') },
@@ -38,13 +35,9 @@ class AppLayout extends React.Component {
         return (
             <ThemeProvider initialStyle="light" initialColor="primary">
                 <Layout sidebarSlim favIcons={ favIcons }>
-                    { /* --------- Navbar ----------- */ }
-                    <Layout.Navbar>
-                        <RoutedNavbars />
-                    </Layout.Navbar>
                     { /* -------- Sidebar ------------*/ }
                     <Layout.Sidebar>
-                        <RoutedSidebars />
+                        <DefaultSidebar />
                     </Layout.Sidebar>
 
                     { /* -------- Content ------------*/ }
@@ -52,14 +45,6 @@ class AppLayout extends React.Component {
                         { children }
                     </Layout.Content>
 
-                    { /* -- Theme Selector (DEMO) ----*/ }
-                    <PageConfigConsumer>
-                    {
-                        ({ sidebarHidden, navbarHidden }) => (
-                            <ThemeSelector styleDisabled={ sidebarHidden && navbarHidden } />
-                        )
-                    }
-                    </PageConfigConsumer>
                 </Layout>
             </ThemeProvider>
         );

@@ -4,53 +4,42 @@ import classNames from 'classnames';
 
 import { ThemeConsumer } from '../../../components/Theme';
 
-const logos = {
-    'white': require('./../../../images/logos/logo-white.svg'),
-    'primary': require('./../../../images/logos/logo-primary.svg'),
-    'success': require('./../../../images/logos/logo-success.svg'),
-    'warning': require('./../../../images/logos/logo-warning.svg'),
-    'danger': require('./../../../images/logos/logo-danger.svg'),
-    'info': require('./../../../images/logos/logo-info.svg'),
-    'indigo': require('./../../../images/logos/logo-indigo.svg'),
-    'purple': require('./../../../images/logos/logo-purple.svg'),
-    'pink': require('./../../../images/logos/logo-pink.svg'),
-    'yellow': require('./../../../images/logos/logo-yellow.svg')
-}
-
-const getLogoUrl = (style, color) => {
-    return logos[color];
-}
-
-// Check for background
-const getLogoUrlBackground = (style, color) => {
-    if (style === 'color') {
-        return logos['white'];
-    } else {
-        return getLogoUrl(style, color);
-    }
-}
+const logo = require('./../../../images/logo.svg')
+const smallLogo = require('./../../../images/logo-small.svg')
 
 const LogoThemed = ({ checkBackground, className, ...otherProps }) => (
     <ThemeConsumer>
     {
         ({ style, color }) => (
             <img
-                src={
-                    checkBackground ?
-                        getLogoUrlBackground(style, color) :
-                        getLogoUrl(style, color)
-                }
+                src={ logo }
                 className={ classNames('d-block', className) }
-                alt="Airframe Logo"
+                alt="LogWire Logo"
                 { ...otherProps }
             />
         )
     }
     </ThemeConsumer>
 );
+
+const SmallLogoThemed = ({ checkBackground, className, ...otherProps }) => (
+    <ThemeConsumer>
+    {
+        ({ style, color }) => (
+            <img
+                src={ smallLogo }
+                className={ classNames('d-block', className) }
+                alt="Small LogWire Logo"
+                { ...otherProps }
+            />
+        )
+    }
+    </ThemeConsumer>
+);
+
 LogoThemed.propTypes = {
     checkBackground: PropTypes.bool,
     className: PropTypes.string,
 };
 
-export { LogoThemed };
+export { LogoThemed, SmallLogoThemed };

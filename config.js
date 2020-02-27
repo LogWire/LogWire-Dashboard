@@ -18,8 +18,8 @@ var config = {
     srcHtmlLayout:          path.join(root, 'app', 'index.html'),
 
     // Site Config ====================================================
-    siteTitle:              'Airframe',
-    siteDescription:        'Default Dashboard ready for Development',
+    siteTitle:              'LogWire',
+    siteDescription:        'Application and Infrastructure Logging',
     siteCannonicalUrl:      'http://localhost:4100',
     siteKeywords:           'react dashboard seed bootstrap',
     scssIncludes:           []
