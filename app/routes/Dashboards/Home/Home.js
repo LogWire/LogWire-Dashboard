@@ -39,10 +39,16 @@ const GetStatus = function (component) {
 
 class Home extends Component {
 
-    state = {
-        systemStatus: {}
-    }
+    constructor(props) {
+        
+      super(props);
 
+      this.state = {
+        systemStatus: {error_type: "Unknown", error_message: "", badgeColor: "warning"}
+      } 
+
+    }
+    
     componentWillMount() {
 
         GetStatus(this);
