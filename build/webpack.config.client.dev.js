@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CircularDependencyPlugin = require('circular-dependency-plugin');
 var ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 var config = require('./../config');
 
@@ -29,6 +30,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new Dotenv({
+			systemvars: true
+		}),
         new CircularDependencyPlugin({
             exclude: /a\.js|node_modules/,
             failOnError: true,

@@ -17,7 +17,7 @@ import { setupPage } from './../../../components/Layout/setupPage';
 import { HeaderMain } from "../../components/HeaderMain";
 
 const GetStatus = function (component) {
-    fetch('https://localhost:5003/status/system')
+    fetch(process.env.REACT_APP_LW_API + '/status/system')
     .then(results => {
         return results.json();
     }).then(data => {
