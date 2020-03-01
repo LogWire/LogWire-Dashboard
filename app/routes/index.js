@@ -1,4 +1,6 @@
 import React from 'react';
+import PrivateRoute from './components/Route/PrivateRoute';
+
 import {
     Route,
     Switch,
@@ -15,8 +17,9 @@ export const RoutedContent = () => {
     return (
         <Switch>
             
-            <Route path="/" exact component={Home} />
             <Route path="/login" exact component={Login} />
+
+            <PrivateRoute path="/" exact component={Home} />
 
             { /*    404    */ }
             <Redirect to="/pages/error-404" />

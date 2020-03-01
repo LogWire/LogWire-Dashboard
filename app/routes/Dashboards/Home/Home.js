@@ -17,6 +17,7 @@ import { setupPage } from './../../../components/Layout/setupPage';
 import { HeaderMain } from "../../components/HeaderMain";
 
 const GetStatus = function (component) {
+
     fetch(process.env.REACT_APP_LW_API + '/status/system')
     .then(results => {
         return results.json();
@@ -35,6 +36,7 @@ const GetStatus = function (component) {
     }).catch(error => {
         component.setState({ systemStatus: {error_type: "Unknown", error_message: "", badgeColor: "warning"}})
     });
+    
 }
 
 class Home extends Component {

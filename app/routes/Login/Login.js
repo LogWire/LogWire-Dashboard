@@ -1,12 +1,10 @@
-import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, Component } from 'react';
+import { Authenticate, CheckLogin } from "../components/Authentication/auth";
 
 import {
     Form,
     FormGroup,
-    FormText,
     Input,
-    CustomInput,
     Button,
     Label,
     EmptyLayout,
@@ -15,55 +13,30 @@ import {
 
 import { HeaderAuth } from "../components/Pages/HeaderAuth";
 
-const ValidateForm = function (component) {
-    return component.state != null && component.state.username.length > 0 && component.state.password.length > 0;
+const ValidateForm = function (username, password) {
+    if(typeof username === 'undefined' && typeof password === 'undefined'){
+         return false;
+    }
+    return username.length > 0 && password.length > 0;
 }
-
-const Authenticate = function (event, component) {
-
-    event.preventDefault();
-
-    component.setState({loggingIn: true});
-
-    fetch(process.env.REACT_APP_LW_API + '/auth/login', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'username': component.state.username,
-          'password': component.state.password
-        },
-    }).then(results => {
-        return results.json();
-    }).then(data => {
-        console.log(data);
-        if(data.userId === ""){
-            
-            component.setState({loggingIn: false, error_message: "Error"});
-        } else {
-            component.props.history.push("/");
-        }
-    }).catch(error => {
-        component.setState({loggingIn: false, error_message: "Error"});
-    });
-    
-}
-
 class Login extends Component {
 
     constructor(props) {
+        super(props);
+        this.state = { 
+            username: "",
+            password: "",
+            loggingIn: false,
+            errorMessage: ""
+            };
+    }
 
-      super(props);
-
-      this.state = {
-        username: "",
-        password: "",
-        loggingIn: false
-      } 
-
+    componentWillMount() {
+        CheckLogin(this.props);
     }
 
     render() {
+
         if(!this.state.loggingIn) {
             return (
                 <EmptyLayout>
@@ -75,7 +48,7 @@ class Login extends Component {
                         />
                         { /* END Header */}
                         { /* START Form */}
-                        <Form className="mb-3" onSubmit={(e) => Authenticate(e, this)}>
+                        <Form className="mb-3" onSubmit={(e) => Authenticate(e, this, this.props)}>
                             <FormGroup>
                                 <Label for="username">
                                     Username
@@ -92,7 +65,7 @@ class Login extends Component {
                             <ThemeConsumer>
                             {
                                 ({ color }) => (
-                                    <Button disabled={!ValidateForm(this)} color={ color } block>
+                                    <Button disabled={!ValidateForm(this.state.username, this.state.password)} color={ color } block>
                                         Sign In
                                     </Button>
                                 )
@@ -114,6 +87,7 @@ class Login extends Component {
                 </EmptyLayout>
             )
         }
+
     }
 
 }
