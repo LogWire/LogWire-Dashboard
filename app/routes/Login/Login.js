@@ -1,5 +1,5 @@
 import React, {useState, Component } from 'react';
-import { Authenticate, CheckLogin } from "../components/Authentication/auth";
+import { Authenticate, CheckLogin } from "../../components/Authentication/auth";
 
 import {
     Form,
@@ -11,7 +11,7 @@ import {
     ThemeConsumer
 } from './../../components';
 
-import { HeaderAuth } from "../components/Pages/HeaderAuth";
+import { HeaderAuth } from "../../components/Pages/HeaderAuth";
 
 const ValidateForm = function (username, password) {
     if(typeof username === 'undefined' && typeof password === 'undefined'){

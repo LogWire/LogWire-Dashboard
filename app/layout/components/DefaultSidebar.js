@@ -8,8 +8,8 @@ import {
 
 import { SidebarMiddleNav } from './SidebarMiddleNav';
 
-import { SidebarTopA } from '../../routes/components/Sidebar/SidebarTopA'
-import { LogoThemed } from '../../routes/components/LogoThemed/LogoThemed';
+import { SidebarTopA } from '../../components/Sidebar/SidebarTopA'
+import { LogoThemed } from '../../components/LogoThemed/LogoThemed';
 
 export const DefaultSidebar = () => (
     <Sidebar>

@@ -14,7 +14,7 @@ import {
 
 
 import { setupPage } from './../../../components/Layout/setupPage';
-import { HeaderMain } from "../../components/HeaderMain";
+import { HeaderMain } from "./../../../components/HeaderMain";
 
 const GetStatus = function (component) {
 
