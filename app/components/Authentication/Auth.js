@@ -53,8 +53,8 @@ export const CheckLogin = function (props){
       console.log(data);
       if(typeof data.accessToken !== 'undefined'){
           AuthService.authenticate(data.accessToken, data.tokenExpires);
-          if(typeof props.location.search !== 'undefined'){
-            props.history.push(props.location.search.replace("?redirect_url=", ""));
+          if(typeof props.location.state.redirect_url !== 'undefined'){
+            props.history.push(props.location.state.redirect_url);
           } else {
             props.history.push('/');
           }

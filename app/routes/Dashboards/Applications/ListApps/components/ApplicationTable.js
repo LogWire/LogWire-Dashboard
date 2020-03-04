@@ -23,6 +23,13 @@ export class ApplicationTable extends React.Component {
             applications: [],
             addRedirect : false
         }
+
+        this.rowEvent = {
+            onClick: (e, row, rowIndex) => {
+                this.setState({id: row.id});
+            }
+        };
+
     }
 
     async componentWillMount() {
@@ -64,10 +71,17 @@ export class ApplicationTable extends React.Component {
     
     }
 
-    render() {
+    render() {      
 
         if(this.state.addRedirect){
-            return <Redirect to='/applications/add'  />
+            return <Redirect to='/applications/add'/>
+        }
+
+        if(this.state.id){
+            return <Redirect to={{
+                pathname: '/applications/overview',
+                state: { id: this.state.id }
+            }}/>
         }
 
         const columnDefs = this.createColumnDefinitions();
@@ -95,6 +109,7 @@ export class ApplicationTable extends React.Component {
                             bordered={ false }
                             responsive
                             hover
+                            rowEvents={this.rowEvent}
                             { ...props.baseProps }
                         />
                     </React.Fragment>
