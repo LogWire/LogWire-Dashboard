@@ -12,8 +12,10 @@ function PrivateRoute({ component: Component, ...rest }) {
                     <Component {...props} />
                   )
             } else {
+                console.log();
+                var url = "/login?redirect_url=" + rest.path;
                 return (
-                    <Redirect to="/login" />
+                    <Redirect to={url} />
                   )
             }
           }            

@@ -47,7 +47,11 @@ export const CheckLogin = function (props){
       console.log(data);
       if(typeof data.accessToken !== 'undefined'){
           AuthService.authenticate(data.accessToken, data.tokenExpires);
-          props.history.push('/');
+          if(typeof props.location.search !== 'undefined'){
+            props.history.push(props.location.search.replace("?redirect_url=", ""));
+          } else {
+            props.history.push('/');
+          }
       } else {
         AuthService.isAuthenticated = false;
       }
@@ -84,7 +88,11 @@ export const Authenticate = function (event, component, props) {
           component.setState({errorMessage: "Unable To Login - Bad Username or Password"});
       } else {
           AuthService.authenticate(data.accessToken, data.tokenExpires);
-          props.history.push('/');
+          if(typeof props.location.search !== 'undefined'){
+            props.history.push(props.location.search.replace("?redirect_url=", ""));
+          } else {
+            props.history.push('/');
+          }
       }
   }).catch(error => {
     component.setState({loggingIn: false});
