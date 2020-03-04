@@ -22,14 +22,6 @@ class ListApps extends Component {
 
         return (
             <Container>
-                <Row className="mb-2">
-                    <Col lg={ 12 }>
-                        <HeaderMain 
-                            title="Applications"
-                            className="mb-4 mb-lg-5"
-                        />
-                    </Col>
-                </Row>
                 <Col lg={ 12 }>
                     <Card className="mb-3">
                         <CardBody>
@@ -39,9 +31,7 @@ class ListApps extends Component {
                 </Col>
             </Container>
         )
-
     }
-
 }
 
 export default setupPage({

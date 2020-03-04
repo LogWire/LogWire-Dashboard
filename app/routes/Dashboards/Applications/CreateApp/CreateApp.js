@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { GetAuthHeader } from '../../../../components/Authentication/auth'
 
 import { 
     Container,
@@ -22,8 +23,28 @@ import {
 import { setupPage } from './../../../../components/Layout/setupPage';
 import { HeaderMain } from "./../../../../components/HeaderMain";
 
-const AddApplication = (event) => {
+const AddApplication = (event, component) => {
     event.preventDefault();
+
+    const headerList = GetAuthHeader();
+    headerList.append('Content-Type', 'application/json');
+    
+    console.log(component.state)
+
+    fetch(process.env.REACT_APP_LW_API + '/application/', {
+        method: 'PUT',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'include',
+        headers: headerList,
+        body: JSON.stringify(component.state)
+    }).then(results => {
+        return results.json();
+    }).then(data => {
+        component.props.history.push('/applications');
+    });
+
+
 }
 
 class CreateApp extends Component {
@@ -31,7 +52,7 @@ class CreateApp extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            name: ""
+            Name: ""
         };
     }
 
@@ -51,7 +72,7 @@ class CreateApp extends Component {
                     <Col lg={ 12 }>
                         <Card className="mb-3">
                             <CardBody>
-                                <Form className="mb-3" onSubmit={(e)=> AddApplication(e)}>
+                                <Form className="mb-3" onSubmit={(e)=> AddApplication(e, this)}>
                                     <FormGroup row>
                                         <Label for="name" sm={3}>
                                             Name
@@ -63,7 +84,7 @@ class CreateApp extends Component {
                                                 id="name" 
                                                 placeholder=""
                                                 value={this.state.name} 
-                                                onChange={e => this.setState({name: e.target.value})}
+                                                onChange={e => this.setState({Name: e.target.value})}
                                             />
                                         </Col>
                                     </FormGroup>

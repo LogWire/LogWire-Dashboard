@@ -2,6 +2,7 @@ import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 import  { Redirect } from 'react-router-dom'
+import { GetAuthHeader } from '../../../../../components/Authentication/auth'
 
 import {
     Button,
@@ -19,9 +20,13 @@ export class ApplicationTable extends React.Component {
         super(props);
 
         this.state = {
-            users: [],
+            applications: [],
             addRedirect : false
         }
+    }
+
+    async componentWillMount() {
+        this.GetAppicationsList();
     }
 
     handleAddRow() {
@@ -35,10 +40,28 @@ export class ApplicationTable extends React.Component {
     createColumnDefinitions() {
         return [
             {
-                dataField: 'applicationName',
+                dataField: 'name',
                 text: 'Application Name'
             }
         ]; 
+    }
+
+    async GetAppicationsList () {
+
+        const headerList = GetAuthHeader();
+    
+        await fetch(process.env.REACT_APP_LW_API + '/application/list', {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'include',
+            headers: headerList
+        }).then(results => {
+            return results.json();
+        }).then(data => {
+            this.setState(data);
+        });
+    
     }
 
     render() {
@@ -52,7 +75,7 @@ export class ApplicationTable extends React.Component {
         return (
             <ToolkitProvider
                 keyField="id"
-                data={ this.state.users }
+                data={ this.state.applications }
                 columns={ columnDefs }
             >
             {

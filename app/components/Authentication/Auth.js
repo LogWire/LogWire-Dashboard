@@ -34,6 +34,12 @@ export const Refresh = function (){
   })
 }
 
+export const GetAuthHeader = function () {
+  const headers = new Headers();
+  headers.append('Authorization', "Bearer " + AuthService.token);
+  return headers;
+}
+
 export const CheckLogin = function (props){
   console.log("Refresh");
   fetch(process.env.REACT_APP_LW_API + '/auth/refresh', {
