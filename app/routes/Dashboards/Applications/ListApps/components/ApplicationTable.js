@@ -9,11 +9,6 @@ import {
     ButtonGroup
 } from '../../../../../components';
 
-const generateRow = (id) => ({
-    id,
-    applicationName: 'Test'
-});
-
 export class ApplicationTable extends React.Component {
 
     constructor(props) {
