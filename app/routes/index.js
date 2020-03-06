@@ -30,7 +30,7 @@ export const RoutedContent = () => {
             <PrivateRoute path="/applications" exact component={ListApps} />
             <PrivateRoute path="/applications/add" exact component={CreateApp} />
             <PrivateRoute path="/applications/overview" exact component={AppOverview} />
-            <PrivateRoute path='/siem' exact component={UserSearch} />
+            <PrivateRoute path='/siem/users' exact component={UserSearch} />
 
 
             { /*    404    */ }
